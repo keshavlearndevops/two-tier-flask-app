@@ -1,28 +1,28 @@
-version: '3'
+version: '3'  # Docker Compose file version
+
 services:
-  
   backend:
     build:
-      context: .
+      context: .  # Build backend service using Dockerfile in current directory
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Map host port 5000 to container port 5000
     environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: your_username
-      MYSQL_PASSWORD: your_password
-      MYSQL_DB: your_database
+      MYSQL_HOST: mysql  # Set MySQL host for backend service
+      MYSQL_USER: devops  # Set MySQL user for backend service
+      MYSQL_PASSWORD: devops  # Set MySQL password for backend service
+      MYSQL_DB: mydb  # Set MySQL database for backend service
     depends_on:
-      - mysql
+      - mysql  # Ensure backend service starts after mysql service
 
   mysql:
-    image: mysql:5.7
+    image: mysql:5.7  # Use MySQL 5.7 Docker image
     environment:
-      MYSQL_ROOT_PASSWORD: your_root_password
-      MYSQL_DATABASE: your_database
-      MYSQL_USER: your_username
-      MYSQL_PASSWORD: your_password
+      MYSQL_ROOT_PASSWORD: test@123  # Set MySQL root password
+      MYSQL_DATABASE: mydb  # Set default MySQL database
+      MYSQL_USER: devops  # Set MySQL user
+      MYSQL_PASSWORD: devops  # Set MySQL user password
     volumes:
-      - mysql-data:/var/lib/mysql  # Mount the volume for MySQL data storage
+      - mysql-data:/var/lib/mysql  # Mount named volume for MySQL data storage
 
 volumes:
-  mysql-data:
+  mysql-data:  # Define named volume for MySQL data persistence
