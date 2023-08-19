@@ -13,20 +13,6 @@ app.config['MYSQL_DB'] = os.environ.get('MYSQL_DB', 'default_db')
 # Initialize MySQL
 mysql = MySQL(app)
 
-# Create the 'messages' table if it doesn't exist
-def create_messages_table():
-    cur = mysql.connection.cursor()
-    cur.execute('''
-        CREATE TABLE IF NOT EXISTS messages (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            message VARCHAR(255)
-        )
-    ''')
-    mysql.connection.commit()
-    cur.close()
-
-create_messages_table()
-
 @app.route('/')
 def hello():
     cur = mysql.connection.cursor()
